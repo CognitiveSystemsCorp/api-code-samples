@@ -1,0 +1,13 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+requests = "==2.26.0"
+websockets = "==10.1"
+
+[requires]
+python_version = "3.7"
+
+[dev-packages]
