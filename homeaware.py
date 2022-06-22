@@ -1,10 +1,13 @@
 import requests, threading, asyncio
 from lib.websocket_utils import websocket
 
+HALO_CSC = "home.halo.csc.wifimotion.ca/api/v1"
+
+CLOUD_SPACE = HALO_CSC ## Replace with the correct cloud space value for accessing your system 
 def main():
     email = "salescognitive0+halo610@gmail.com"
     password = "Tester610"
-    URL = "https://home.halo.csc.wifimotion.ca/api/v1"
+    URL = "https://" + CLOUD_SPACE
 
     try:
         #POST API = Login and Begin Session
@@ -52,7 +55,7 @@ def main():
         #             "building_size"
         #             "live_enabled"
         #             "subscription_id"
-        #             "scene_id"
+        #             "scene_id"               ## Represents network home/away mode: 4 = home mode, 1 = Away mode
         #             "network_scene_config"   ## To be used later as network scene config id to show and update scene settings
         #             "owner_email"
         #             "present_count"
@@ -93,7 +96,7 @@ def main():
         #             "building_size"
         #             "live_enabled"
         #             "subscription_id"
-        #             "scene_id"
+        #             "scene_id"              ## Change the value: 4 = home mode, 1 = Away mode
         #             "network_scene_config"
         #             "owner_email"
         #             "present_count"
@@ -114,7 +117,7 @@ def main():
                 "building_type": str(general_settings_data["data"][0]["building_type"]),
                 "building_size": str(general_settings_data["data"][0]["building_size"]),
                 "live_enabled": general_settings_data["data"][0]["live_enabled"],
-                "scene_id": str(general_settings_data["data"][0]["scene_id"]),
+                "scene_id": 4,
             },                                        ## REQUEST BODY
             headers = header)
         data = response.json()
@@ -146,7 +149,8 @@ def main():
             URL + "/network_scene_configs/" + network_scene_config_id,
             headers = header)
         scene_settings_data = response.json()
-        #print("auto_switching_enabled",scene_settings_data["auto_switching_enabled"])
+        print("guardian_enabled",scene_settings_data["guardian_enabled"])
+        print("auto_switching_enabled",scene_settings_data["auto_switching_enabled"])
 
 
 
@@ -228,7 +232,7 @@ def main():
 
 
         #WEBSOCKET API = Live Motion Websocket
-        ws_url = "wss://home.dogfood.plume.wifimotion.ca/api/v1" + "/motions?token=" + token_str + "&network_id=" + id
+        ws_url = "wss://"+ CLOUD_SPACE + "/motions?token=" + token_str + "&network_id=" + id
         ws = websocket(ws_url, 5) 
         t1 = threading.Thread(target=loop, args=(ws.run(),),)
         t1.start()
