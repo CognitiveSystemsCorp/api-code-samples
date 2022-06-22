@@ -2,8 +2,11 @@ import requests, threading, asyncio
 from lib.websocket_utils import websocket
 
 HALO_CSC = "home.halo.csc.wifimotion.ca/api/v1"
+DOGFOOD = "home.dogfood.plume.wifimotion.ca/api/v1"
+HALOEU = "home.haloeu.csc.wifimotion.ca/api/v1"
 
 CLOUD_SPACE = HALO_CSC ## Replace with the correct cloud space value for accessing your system 
+
 def main():
     email = "salescognitive0+halo610@gmail.com"
     password = "Tester610"
@@ -96,7 +99,7 @@ def main():
         #             "building_size"
         #             "live_enabled"
         #             "subscription_id"
-        #             "scene_id"              ## Change the value: 4 = home mode, 1 = Away mode
+        #             "scene_id"              ## To change home/away mode, change the value to: 4 or 1, where 4 = home mode, 1 = Away mode
         #             "network_scene_config"
         #             "owner_email"
         #             "present_count"
