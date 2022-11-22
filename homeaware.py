@@ -1,11 +1,7 @@
 import requests, threading, asyncio
 from lib.websocket_utils import websocket
 
-HALO_CSC = "home.halo.csc.wifimotion.ca/api/v1"
-DOGFOOD = "home.dogfood.plume.wifimotion.ca/api/v1"
-HALOEU = "home.haloeu.csc.wifimotion.ca/api/v1"
-
-CLOUD_SPACE = HALO_CSC ## Replace with the correct cloud space value for accessing your system 
+CLOUD_SPACE = "dummy.cloud.url.com/api" ## Replace this value with the correct cloud space value for accessing your system 
 
 def main():
     email = "dummy@gmail.com"
