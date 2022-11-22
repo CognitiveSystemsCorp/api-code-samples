@@ -8,8 +8,8 @@ HALOEU = "home.haloeu.csc.wifimotion.ca/api/v1"
 CLOUD_SPACE = HALO_CSC ## Replace with the correct cloud space value for accessing your system 
 
 def main():
-    email = "salescognitive0+halo610@gmail.com"
-    password = "Tester610"
+    email = "dummy@gmail.com"
+    password = "Dummy12345!@#"
     URL = "https://" + CLOUD_SPACE
 
     try:
