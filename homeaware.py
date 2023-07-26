@@ -1,7 +1,7 @@
-import requests, threading, asyncio
+import requests, threading, asyncio, pprint
 from lib.websocket_utils import websocket
 
-CLOUD_SPACE = "dummy.cloud.url/api" ## Replace this value with the correct cloud space value for accessing your system 
+CLOUD_SPACE = "dummy.cloud.url/" ## Replace this value with the correct cloud space value for accessing your system 
 
 def main():
     email = "dummy@gmail.com"
@@ -251,7 +251,8 @@ def main():
             URL + "/sounding/settings/",
             headers = header)                                       ## REQUEST BODY
         data = response.json()
-        print("GET GLOBAL SETTINGS", data)
+        print("GET GLOBAL SETTINGS")
+        pprint.pprint(data)
 
 
     #GET API = GET CLIENT STATE
@@ -305,14 +306,15 @@ def main():
             URL + "/sounding/clients/",
             headers = header)                                       ## REQUEST BODY
         data = response.json()
-        print("GET CLIENTS STATE", data)
+        print("GET CLIENTS STATE")
+        pprint.pprint(data)
 
 ############################################# SOUNDING V2 API ##########################################################
 
         
         loop = asyncio.get_event_loop()
         loop.run_until_complete(main())
-	#Incase you have python<3.7 comment both the lines above and replace loop used below with asyncio.run
+	    #Incase you have python<3.7 comment both the lines above and replace loop used below with asyncio.run
 
 
         #WEBSOCKET API = Live Motion Websocket
