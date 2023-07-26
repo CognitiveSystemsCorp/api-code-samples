@@ -1,7 +1,7 @@
 import requests, threading, asyncio, pprint
 from lib.websocket_utils import websocket
 
-CLOUD_SPACE = "dummy.cloud.url/" ## Replace this value with the correct cloud space value for accessing your system 
+CLOUD_SPACE = "dummy.cloud.url/api" ## Replace this value with the correct cloud space value for accessing your system 
 
 def main():
     email = "dummy@gmail.com"
@@ -12,7 +12,7 @@ def main():
         #POST API = Login and Begin Session
         #RESPONSE:  
         # /"refresh_token"
-        # /"token"                           ##system generates new token on every call of this api
+        # /"token"                                                      ##system generates new token on every call of this api
         # /"user": {
         #           "id"
         #           "email"
@@ -49,13 +49,13 @@ def main():
         #             "longitude"
         #             "address"
         #             "timezone"
-        #             "pet_size"             ## Denotes if the user has pet, amd if yes then of what size // Values: none, small, medium, large
+        #             "pet_size"                                        ## Denotes if the user has pet, amd if yes then of what size // Values: none, small, medium, large
         #             "building_type"
         #             "building_size"
         #             "live_enabled"
         #             "subscription_id"
-        #             "scene_id"               ## Represents network home/away mode: 4 = home mode, 1 = Away mode
-        #             "network_scene_config"   ## To be used later as network scene config id to show and update scene settings
+        #             "scene_id"                                        ## Represents network home/away mode: 4 = home mode, 1 = Away mode
+        #             "network_scene_config"                            ## To be used later as network scene config id to show and update scene settings
         #             "owner_email"
         #             "present_count"
         #             "claimed"
@@ -95,7 +95,7 @@ def main():
         #             "building_size"
         #             "live_enabled"
         #             "subscription_id"
-        #             "scene_id"              ## To change home/away mode, change the value to: 4 or 1, where 4 = home mode, 1 = Away mode
+        #             "scene_id"                                        ## To change home/away mode, change the value to: 4 or 1, where 4 = home mode, 1 = Away mode
         #             "network_scene_config"
         #             "owner_email"
         #             "present_count"
@@ -167,7 +167,7 @@ def main():
         #     "guardian_weekday_start_time_minutes": 0,
         #     "guardian_weekday_end_time_hours": 8,
         #     "guardian_weekday_end_time_minutes": 0,
-        #     "auto_switching_enabled": false,                      ## Shows us state for Home/away mode
+        #     "auto_switching_enabled": false,                          ## Shows us state for Home/away mode
         #     "guardian_weekend_start_time_hours": 7,
         #     "guardian_weekend_start_time_minutes": 0,
         #     "guardian_weekend_end_time_hours": 9,
@@ -190,7 +190,7 @@ def main():
                 "guardian_weekend_end_time_hours": scene_settings_data["guardian_weekend_end_time_hours"],
                 "guardian_weekend_end_time_minutes": scene_settings_data["guardian_weekend_end_time_minutes"]
             },
-            headers = header)                                       ## REQUEST BODY
+            headers = header)                                           ## REQUEST BODY
         data = response.json()
         #print("UPDATE SCENE SETTINGS", data)
 
@@ -201,7 +201,7 @@ def main():
         data = response.json()
         friendly_names = []
         for info in data["devices"]:
-            friendly_names.append(info["friendly_name"])              ## Friendly names of all the devices connected in network. Shows serial number if you have not renamed the device
+            friendly_names.append(info["friendly_name"])               ## Friendly names of all the devices connected in network. Shows serial number if you have not renamed the device
         #print("Network Topologies",str(friendly_names))         
 
 
@@ -210,8 +210,8 @@ def main():
         #RESPONSE:
         #[
             # [
-            #     0.826388888888889,                                  ## Motion Intensity 
-            #     1637028000                                          ## TimeStamp when motion of above intensity occured
+            #     0.826388888888889,                                   ## Motion Intensity 
+            #     1637028000                                           ## TimeStamp when motion of above intensity occured
             # ], ...
         #]
         UTC_TIME_NOW = "1637546100"
@@ -219,7 +219,7 @@ def main():
 
         response = requests.get(
             URL + "/motion_history_densities" 
-            #+ "?from="+ UTC_TIME_01_NOV +"&to="+ UTC_TIME_NOW        ## QueryString variables used are optional
+            #+ "?from="+ UTC_TIME_01_NOV +"&to="+ UTC_TIME_NOW         ## QueryString variables used are optional
             ,headers = header)
         data = response.json()
         #print("Motion History Data",str(data))                        ## Prints an array list of intesities of motion with timestamp when motion occured 
@@ -232,24 +232,24 @@ def main():
     #GET API = GET GLOBAL SETTINGS
         #RESPONSE:
         # {
-        #     "motion_events_enabled": 1,      #Enable/Disable the Home/Away mode of network
-        #     "motion_events_armed": 1,        #Enable/Disable logging of MotionDetectedEvents in cloud history
-        #     "mesh_auto_disable": 0,          #Enable/Disable mesh link sounding on all current and future nodes.     
-        #     "sounding_mode": "allow",        #
-        #     "leafblower_cutoff": 0,
-        #     "zone_priority_list": [
+        #     "motion_events_enabled": 1,                               #Enable/Disable the Home/Away mode of network
+        #     "motion_events_armed": 1,                                 #Enable/Disable logging of MotionDetectedEvents in cloud history
+        #     "mesh_auto_disable": 0,                                   #Enable/Disable mesh link sounding on all current and future nodes.     
+        #     "sounding_mode": "allow",                                 #Enable/Disable sounding state of the network
+        #     "leafblower_cutoff": 0,                                   #Minimum score for leafblower to sound a client device
+        #     "zone_priority_list": [                                   #List of zones in priority order
         #         "Router",
         #         "Bhumik room",
         #         "Aidan room",
         #         "Glass"
         #     ],
-        #     "sensitivity": 1,
-        #     "pet_mode": 0,
-        #     "cooldown": 120
+        #     "sensitivity": 1,                                         #Motion Detection Sensitivity (1.0 - high, 2.0 - medium, 3.0 - low, generally bigger => less motion)
+        #     "pet_mode": 0,                                            #Enable/Disable the pet filtering
+        #     "cooldown": 120                                           #Minimum period between successive MotionDetectedEvent (sec)
         # }
         response = requests.get(
             URL + "/sounding/settings/",
-            headers = header)                                       ## REQUEST BODY
+            headers = header)                                           
         data = response.json()
         print("GET GLOBAL SETTINGS")
         pprint.pprint(data)
@@ -304,7 +304,7 @@ def main():
         # }
         response = requests.get(
             URL + "/sounding/clients/",
-            headers = header)                                       ## REQUEST BODY
+            headers = header)                                       
         data = response.json()
         print("GET CLIENTS STATE")
         pprint.pprint(data)
