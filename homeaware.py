@@ -148,8 +148,8 @@ def main():
             URL + "/network_scene_configs/" + network_scene_config_id,
             headers = header)
         scene_settings_data = response.json()
-        print("guardian_enabled",scene_settings_data["guardian_enabled"])
-        print("auto_switching_enabled",scene_settings_data["auto_switching_enabled"])
+        #print("guardian_enabled",scene_settings_data["guardian_enabled"])
+        #print("auto_switching_enabled",scene_settings_data["auto_switching_enabled"])
 
 
 
@@ -222,7 +222,7 @@ def main():
             #+ "?from="+ UTC_TIME_01_NOV +"&to="+ UTC_TIME_NOW        ## QueryString variables used are optional
             ,headers = header)
         data = response.json()
-        print("Motion History Data",str(data))                        ## Prints an array list of intesities of motion with timestamp when motion occured 
+        #print("Motion History Data",str(data))                        ## Prints an array list of intesities of motion with timestamp when motion occured 
         
         
         loop = asyncio.get_event_loop()
@@ -236,7 +236,91 @@ def main():
         t1 = threading.Thread(target=loop, args=(ws.run(),),)
         t1.start()
         t1.join()
-        
+
+
+
+############################################# SOUNDING V2 API ##########################################################
+
+
+    #GET API = GET GLOBAL SETTINGS
+        #RESPONSE:
+        # {
+        #     "motion_events_enabled": 1,      #Enable/Disable the Home/Away mode of network
+        #     "motion_events_armed": 1,        #Enable/Disable logging of MotionDetectedEvents in cloud history
+        #     "mesh_auto_disable": 0,          #Enable/Disable mesh link sounding on all current and future nodes.     
+        #     "sounding_mode": "allow",        #
+        #     "leafblower_cutoff": 0,
+        #     "zone_priority_list": [
+        #         "Router",
+        #         "Bhumik room",
+        #         "Aidan room",
+        #         "Glass"
+        #     ],
+        #     "sensitivity": 1,
+        #     "pet_mode": 0,
+        #     "cooldown": 120
+        # }
+        response = requests.put(
+            URL + "/sounding/settings/",
+            headers = header)                                       ## REQUEST BODY
+        data = response.json()
+        print("GET GLOBAL SETTINGS", data)
+
+
+    #GET API = GET CLIENT STATE
+        #RESPONSE:
+        # {
+        #     "devices": [
+        #         {
+        #             "is_node": true,
+        #             "is_extender": false,
+        #             "friendly_name": "",
+        #             "is_online": true,
+        #             "location": "",
+        #             "sounding_warmup": null,
+        #             "sounding_status": false,
+        #             "sounding_status_score": -1,
+        #             "sounding_status_reason": "N/A",
+        #             "sensitivity_mode": "global",
+        #             "sensitivity": 1,
+        #             "links": [],
+        #             "id": 133,
+        #             "is_root": true,
+        #             "device_id": "csi-b-44d4541e94b0",
+        #             "omot_version": null,
+        #             "sounding_mesh": "allow"
+        #         },
+        #         {
+        #             "mac": "f0:ef:86:06:2b:8d",
+        #             "is_node": false,
+        #             "is_extender": false,
+        #             "friendly_name": "",
+        #             "is_online": true,
+        #             "location": "",
+        #             "sounding_mode": "allow",
+        #             "sounding_warmup": null,
+        #             "sounding_status": true,
+        #             "sounding_status_score": 0.1,
+        #             "sounding_status_reason": "N/A",
+        #             "sensitivity_mode": "global",
+        #             "sensitivity": 1,
+        #             "links": [
+        #                 {
+        #                     "src_id": 133,
+        #                     "rssi": "-45",
+        #                     "if_ch": 1
+        #                 }
+        #             ]
+        #         }
+        #     ]
+        # }
+        response = requests.put(
+            URL + "/sounding/clients/",
+            headers = header)                                       ## REQUEST BODY
+        data = response.json()
+        print("GET CLIENTS STATE", data)     
+    
+
     except Exception as e:
         print (str(e))   
 
