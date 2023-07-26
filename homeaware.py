@@ -224,19 +224,6 @@ def main():
         data = response.json()
         #print("Motion History Data",str(data))                        ## Prints an array list of intesities of motion with timestamp when motion occured 
         
-        
-        loop = asyncio.get_event_loop()
-        loop.run_until_complete(main())
-	#Incase you have python<3.7 comment both the lines above and replace loop used below with asyncio.run
-
-
-        #WEBSOCKET API = Live Motion Websocket
-        ws_url = "wss://"+ CLOUD_SPACE + "/motions?token=" + token_str + "&network_id=" + id
-        ws = websocket(ws_url, 5) 
-        t1 = threading.Thread(target=loop, args=(ws.run(),),)
-        t1.start()
-        t1.join()
-
 
 
 ############################################# SOUNDING V2 API ##########################################################
@@ -260,7 +247,7 @@ def main():
         #     "pet_mode": 0,
         #     "cooldown": 120
         # }
-        response = requests.put(
+        response = requests.get(
             URL + "/sounding/settings/",
             headers = header)                                       ## REQUEST BODY
         data = response.json()
@@ -314,11 +301,30 @@ def main():
         #         }
         #     ]
         # }
-        response = requests.put(
+        response = requests.get(
             URL + "/sounding/clients/",
             headers = header)                                       ## REQUEST BODY
         data = response.json()
-        print("GET CLIENTS STATE", data)     
+        print("GET CLIENTS STATE", data)
+
+############################################# SOUNDING V2 API ##########################################################
+
+        
+        loop = asyncio.get_event_loop()
+        loop.run_until_complete(main())
+	#Incase you have python<3.7 comment both the lines above and replace loop used below with asyncio.run
+
+
+        #WEBSOCKET API = Live Motion Websocket
+        ws_url = "wss://"+ CLOUD_SPACE + "/motions?token=" + token_str + "&network_id=" + id
+        ws = websocket(ws_url, 5) 
+        t1 = threading.Thread(target=loop, args=(ws.run(),),)
+        t1.start()
+        t1.join()
+
+
+
+     
     
 
     except Exception as e:
