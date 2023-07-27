@@ -237,7 +237,7 @@ def main():
         #     "mesh_auto_disable": 0,                                   #Enable/Disable mesh link sounding on all current and future nodes.     
         #     "sounding_mode": "allow",                                 #Enable/Disable sounding state of the network
         #     "leafblower_cutoff": 0,                                   #Minimum score for leafblower to sound a client device
-        #     "zone_priority_list": [                                   #List of zones in priority order
+        #     "zone_priority_list": [                                   #List of zones in prioritized order
         #         "Router",
         #         "Bhumik room",
         #         "Aidan room",
@@ -260,23 +260,23 @@ def main():
         # {
         #     "devices": [
         #         {
-        #             "is_node": true,
-        #             "is_extender": false,
-        #             "friendly_name": "",
-        #             "is_online": true,
-        #             "location": "",
-        #             "sounding_warmup": null,
-        #             "sounding_status": false,
-        #             "sounding_status_score": -1,
-        #             "sounding_status_reason": "N/A",
-        #             "sensitivity_mode": "global",
-        #             "sensitivity": 1,
-        #             "links": [],
-        #             "id": 133,
-        #             "is_root": true,
-        #             "device_id": "csi-b-44d4541e94b0",
-        #             "omot_version": null,
-        #             "sounding_mesh": "allow"
+        #             "is_node": true,                                  #Denotes if the given device is node or a leaf
+        #             "is_extender": false,                             #Denotes if device is master or slave node
+        #             "friendly_name": "",                              #Human readable name assigned to the Device or Node.
+        #             "is_online": true,                                #Denotes if node or device is online
+        #             "location": "",                                   #Device location name assigned to the Device or Node.
+        #             "sounding_warmup": null,                          
+        #             "sounding_status": false,                         #Shows sounding status of the device
+        #             "sounding_status_score": -1,                      #Shows the status score (-1 means device is not sounding)
+        #             "sounding_status_reason": "N/A",                  #reason for device not sounding
+        #             "sensitivity_mode": "global",                     #Controls if the device can be used for sounding.
+        #             "sensitivity": 1,                                 #Current sensitivity of the device. Only valid when sensitivity_mode = override, otherwise an error will be returned.
+        #             "links": [],                                      #Shows links that the device is forming with other device
+        #             "id": 133,                                        
+        #             "is_root": true,                                  #Shows if device is a master node
+        #             "device_id": "csi-b-44d4541e94b0",                #Shows device id created by concating the mac id
+        #             "omot_version": null,                             #shows the omot version used in the network
+        #             "sounding_mesh": "allow"                          #Shows if sounding is allowed in mesh mode in network
         #         },
         #         {
         #             "mac": "f0:ef:86:06:2b:8d",
