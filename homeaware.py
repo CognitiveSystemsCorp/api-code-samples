@@ -1,7 +1,7 @@
 import requests, threading, asyncio, pprint
 from lib.websocket_utils import websocket
 
-CLOUD_SPACE = "dummy.cloud.url/api" ## Replace this value with the correct cloud space value for accessing your system 
+CLOUD_SPACE = "dummy.cloud.url" ## Replace this value with the correct cloud space value for accessing your system 
 
 def main():
     email = "dummy@gmail.com"
@@ -27,7 +27,7 @@ def main():
             data = {"email": email, "password": password}) #Request body
         data = response.json()
         token_str = data["token"]
-        #print("Token",token_str)
+        print("Token",token_str)
 
         # We are going to attach the token as header in each api call further
         header = {"Authorization": token_str} 
@@ -121,88 +121,6 @@ def main():
             headers = header)
         data = response.json()
         #print("pet_size",data["pet_size"])
-
-
-
-        #GET API = SHOW SCENE SETTINGS
-        #RESPONSE:
-        # {
-        #     "id": xxxx,
-        #     "network_id": yyyy,
-        #     "excessive_motion_seconds": 600,
-        #     "excessive_motion_enabled": true,
-        #     "created_at": "2021-10-28T21:36:18.187Z",
-        #     "updated_at": "2021-11-26T02:16:26.230Z",
-        #     "guardian_enabled": false,
-        #     "guardian_weekday_start_time_hours": 6,
-        #     "guardian_weekday_start_time_minutes": 0,
-        #     "guardian_weekday_end_time_hours": 8,
-        #     "guardian_weekday_end_time_minutes": 0,
-        #     "auto_switching_enabled": false,                          ## Shows us state for Home/away mode
-        #     "guardian_weekend_start_time_hours": 7,
-        #     "guardian_weekend_start_time_minutes": 0,
-        #     "guardian_weekend_end_time_hours": 9,
-        #     "guardian_weekend_end_time_minutes": 0
-        # }
-        response = requests.get(
-            URL + "/network_scene_configs/" + network_scene_config_id,
-            headers = header)
-        scene_settings_data = response.json()
-        #print("guardian_enabled",scene_settings_data["guardian_enabled"])
-        #print("auto_switching_enabled",scene_settings_data["auto_switching_enabled"])
-
-
-
-        #GET API = UPDATE SCENE SETTINGS
-        #RESPONSE:
-        # {
-        #     "id": xxxx,
-        #     "network_id": yyyy,
-        #     "excessive_motion_seconds": 600,
-        #     "excessive_motion_enabled": true,
-        #     "created_at": "2021-10-28T21:36:18.187Z",
-        #     "updated_at": "2021-11-26T02:16:26.230Z",
-        #     "guardian_enabled": false,
-        #     "guardian_weekday_start_time_hours": 6,
-        #     "guardian_weekday_start_time_minutes": 0,
-        #     "guardian_weekday_end_time_hours": 8,
-        #     "guardian_weekday_end_time_minutes": 0,
-        #     "auto_switching_enabled": false,                          ## Shows us state for Home/away mode
-        #     "guardian_weekend_start_time_hours": 7,
-        #     "guardian_weekend_start_time_minutes": 0,
-        #     "guardian_weekend_end_time_hours": 9,
-        #     "guardian_weekend_end_time_minutes": 0
-        # }
-        response = requests.put(
-            URL + "/network_scene_configs/" + network_scene_config_id,
-            data = {
-                "id": scene_settings_data["id"],
-                "excessive_motion_seconds": scene_settings_data["excessive_motion_seconds"],
-                "excessive_motion_enabled": scene_settings_data["excessive_motion_enabled"],
-                "guardian_enabled": scene_settings_data["guardian_enabled"],
-                "guardian_weekday_start_time_hours": scene_settings_data["guardian_weekday_start_time_hours"],
-                "guardian_weekday_start_time_minutes": scene_settings_data["guardian_weekday_start_time_minutes"],
-                "guardian_weekday_end_time_hours": scene_settings_data["guardian_weekday_end_time_hours"],
-                "guardian_weekday_end_time_minutes": scene_settings_data["guardian_weekday_end_time_minutes"],
-                "auto_switching_enabled": scene_settings_data["auto_switching_enabled"],
-                "guardian_weekend_start_time_hours": scene_settings_data["guardian_weekend_start_time_hours"],
-                "guardian_weekend_start_time_minutes": scene_settings_data["guardian_weekend_start_time_minutes"],
-                "guardian_weekend_end_time_hours": scene_settings_data["guardian_weekend_end_time_hours"],
-                "guardian_weekend_end_time_minutes": scene_settings_data["guardian_weekend_end_time_minutes"]
-            },
-            headers = header)                                           ## REQUEST BODY
-        data = response.json()
-        #print("UPDATE SCENE SETTINGS", data)
-
-        #GET API = Network Topologies
-        response = requests.get(
-            URL + "/topologies" 
-            ,headers = header)
-        data = response.json()
-        friendly_names = []
-        for info in data["devices"]:
-            friendly_names.append(info["friendly_name"])               ## Friendly names of all the devices connected in network. Shows serial number if you have not renamed the device
-        #print("Network Topologies",str(friendly_names))         
 
 
 
@@ -314,7 +232,7 @@ def main():
         
         loop = asyncio.get_event_loop()
         loop.run_until_complete(main())
-	    #Incase you have python<3.7 comment both the lines above and replace loop used below with asyncio.run
+        #Incase you have python<3.7 comment both the lines above and replace loop used below with asyncio.run
 
 
         #WEBSOCKET API = Live Motion Websocket
