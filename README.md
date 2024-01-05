@@ -23,7 +23,9 @@ From the documentation URL given above you will be able to find the apis given b
 3. GET Household Sleep-Wake Times Data
 4. GET Household Activity
 5. GET Live Motion Websocket
-6. POST Store Device Push Token (To enable notifications)
+
+[Firebase Notifications] - To enable fcm notifications, send your device token to app cloud
+1. POST Store Device Push Token 
 
 [Universal Alerting] - To get / update Caregiver Aware Alerts
 1. GET Get alerts from network
