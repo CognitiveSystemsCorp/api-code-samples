@@ -8,7 +8,6 @@ Instructions to run the api script:
 6. Run "python homeaware.py" or "python3 homeaware.py"
 7. To call other apis uncomment or comment lines with print statement as required in the code "motion.py"
 
-
 Documentation URL: https://api-docs.qatools.csc.wifimotion.ca/view/app-cloud/latest.html
 
 List of APIs used in Caregiver Aware MVP: 
