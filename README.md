@@ -1,4 +1,4 @@
-Instructions to run the api script:
+# Instructions to run the api script:
 
 1. Edit homeaware.py file and enter the email and password of the system you are using. Update the CLOUD_SPACE url with the one where your system belongs.
 2. Open command prompt (cmd)
@@ -10,7 +10,7 @@ Instructions to run the api script:
 
 Documentation URL: https://api-docs.qatools.csc.wifimotion.ca/view/app-cloud/latest.html
 
-List of APIs used in Caregiver Aware MVP: 
+# List of APIs used in Caregiver Aware MVP: 
 
 [Logging In]
 1. POST Login and Begin Session
