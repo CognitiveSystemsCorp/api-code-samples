@@ -4,8 +4,8 @@ from lib.websocket_utils import websocket
 CLOUD_SPACE = "dummy.cloud.url" ## Replace this value with the correct cloud space value for accessing your system 
 
 def main():
-    email = "dummy@gmail.com"
-    password = "Dummy12345!@#"
+    email = "dummy@gmail.com" ## Replace this value with credentials you have for evaluation kit
+    password = "Dummy12345!@#" ## Replace this value with credentials you have for evaluation kit
     URL = "https://" + CLOUD_SPACE
 
     try:
