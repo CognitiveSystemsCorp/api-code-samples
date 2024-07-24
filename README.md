@@ -8,7 +8,7 @@
 6. Run "python main.py" or "python3 main.py"
 7. To call other apis uncomment or comment lines with print statement as required in the code "motion.py"
 
-Documentation URL: https://api-docs.qatools.csc.wifimotion.ca/view/app-cloud/latest.html
+Documentation URL: https://api-docs.qatools.csc.wifimotion.ca/docs/app-cloud/v1-5-x.html#tag/Sounding-v2
 
 # List of APIs used in Caregiver Aware MVP: 
 
